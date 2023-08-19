@@ -1,12 +1,67 @@
 import { Controller, Get, Query } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
 import { UsersService } from './user.service';
 import { User } from './user.interface';
 
+@ApiTags('users')
 @Controller('api')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('users')
+  @ApiOperation({ summary: 'Get users' })
+  @ApiParam({
+    name: 'createdFrom',
+    required: false,
+    type: String,
+    description: 'Filter users created from this date.',
+  })
+  @ApiParam({
+    name: 'createdTo',
+    required: false,
+    type: String,
+    description: 'Filter users created to this date.',
+  })
+  @ApiParam({
+    name: 'jobType',
+    required: false,
+    type: String,
+    description: 'Filter users by job type.',
+  })
+  @ApiParam({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'The page number.',
+  })
+  @ApiParam({
+    name: 'pageSize',
+    required: false,
+    type: Number,
+    description: 'The page size.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The users have been successfully fetched.',
+    type: Array,
+    isArray: true,
+    schema: {
+      nullable: true,
+      type: 'array',
+      example: [
+        {
+          id: '1',
+          name: 'John Doe',
+          jobType: 'Developer',
+          createdAt: '2021-01-01T00:00:00.000Z',
+          city: 'New York',
+          zipCode: '10001',
+          address: '5th Avenue',
+          gender: 'Female',
+        },
+      ],
+    },
+  })
   async getUsers(
     @Query()
     filter?: { createdFrom?: string; createdTo?: string; jobType?: string },
