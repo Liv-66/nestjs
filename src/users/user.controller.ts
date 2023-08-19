@@ -39,9 +39,6 @@ export class UsersController {
       : null;
 
     return users.filter((user) => {
-      console.log(user.createdAt);
-      console.log(parsedCreatedFrom);
-      console.log(parsedCreatedTo);
       const createdDate = new Date(user.createdAt);
       const createdDateMatch =
         parsedCreatedFrom && !parsedCreatedTo
@@ -54,7 +51,6 @@ export class UsersController {
       const jobTypeMatch = filter.jobType
         ? user.jobType === filter.jobType
         : true;
-      console.log(createdDateMatch, jobTypeMatch);
       return createdDateMatch && jobTypeMatch;
     });
   }
