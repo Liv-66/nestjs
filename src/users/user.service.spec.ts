@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
+import { UsersService } from './user.service';
 import { AxiosResponse } from 'axios';
 import axios from 'axios';
 import { mockUsersData } from './mock-users-data'; // Create a mock data file for testing
@@ -31,7 +31,7 @@ describe('UsersService', () => {
         statusText: 'OK',
         headers: {},
         config: {
-          headers: undefined
+          headers: undefined,
         },
       };
 
@@ -45,7 +45,9 @@ describe('UsersService', () => {
     it('should handle errors', async () => {
       jest.spyOn(axios, 'get').mockRejectedValue(new Error('Mocked error'));
 
-      await expect(usersService.getUsers()).rejects.toThrowError('Mocked error');
+      await expect(usersService.getUsers()).rejects.toThrowError(
+        'Mocked error',
+      );
     });
   });
 });
