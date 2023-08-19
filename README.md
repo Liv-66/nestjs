@@ -9,6 +9,36 @@ This repository contains the implementation of a Node.js API project using the N
 3. npm run start
 4. Access the Swagger documentation: Open your browser and navigate to http://localhost:3000/api.
 
+## Unit Test
+
+```
+- src/: Contains the application's source code.
+  - users/: Contains the users module.
+    - users.controller.spec.ts: Unit tests for UsersController.
+    - users.service.spec.ts: Unit tests for UsersService
+    - mock-users-data.ts: Contains mock user data.
+```
+
+Run JEST test
+
+```
+npm run test
+```
+
+## Directory Structure
+
+```
+- src/: Contains the application's source code.
+  - users/: Contains the users module.
+    - user.interface.ts: Defines the User interface.
+    - users.controller.ts: Implements the API endpoints.
+    - users.service.ts: Implements the business logic.
+    - mock-users-data.ts: Contains mock user data.
+- main.ts: Bootstrap file for the Nest.js application.
+- app.module.ts: Root module of the application.
+
+```
+
 ## Endpoints
 
 Get Users
