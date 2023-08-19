@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
 import { UsersService } from './user.service';
 import { User } from './user.interface';
@@ -114,5 +114,12 @@ export class UsersController {
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     return users.slice(startIndex, endIndex);
+  }
+
+  @Get('user-detail/:id')
+  async getUserDetail(@Param('id') id: string): Promise<User> {
+    const users = await this.usersService.getUsers();
+    const user: User = users.find((user) => user.id === id);
+    return user;
   }
 }
